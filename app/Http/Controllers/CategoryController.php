@@ -61,7 +61,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Category::where('id', $id)->update([
+            'name' => $request->name
+        ]);
+
+        return back()->with('success', 'Kategori berhasil diupdate!');
     }
 
     /**
